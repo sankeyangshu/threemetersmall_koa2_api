@@ -3,10 +3,10 @@
  * @Author: 王振
  * @Date: 2021-06-13 14:10:33
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-22 14:43:42
+ * @LastEditTime: 2021-06-30 16:57:43
  */
 
-//获取默认头像
+// 获取默认头像
 const { DEFAULT_PICTURE } = require('../conf/constant');
 const { timeFormat } = require('../utils/date');
 
@@ -31,11 +31,11 @@ function formatUser(list) {
   }
 
   if (list instanceof Array) {
-    //数组
+    // 数组
     return list.map(_formatUserPicture);
   }
 
-  //单个对象
+  // 单个对象
   return _formatUserPicture(list);
 }
 
@@ -49,6 +49,10 @@ function _formatDBTime(obj) {
   return obj;
 }
 
+/**
+ * @description: 格式化地址
+ * @param {Object} obj 数据
+ */
 function _formatDBAddress(obj) {
   const arr = {};
   arr.id = obj.id;
@@ -64,21 +68,85 @@ function _formatDBAddress(obj) {
  * @param {Array|Object} list 用户收货地址列表
  */
 function formatAddress(list) {
-  //判断是否存在数据
+  // 判断是否存在数据
   if (!list) {
     return list;
   }
 
   if (list instanceof Array) {
-    //数组
+    // 数组
     return list.map(_formatDBAddress);
   }
 
-  //单个对象
+  // 单个对象
+  return _formatDBTime(list);
+}
+
+/**
+ * @description: 格式化一级分类对象
+ * @param {Array} list 分类总数组
+ * @param {Array} arr 二级分类数组
+ */
+function _formatONECategory(list, arr) {
+  const array = []; // 分类列表
+  for (let i = 0; i < list.length; i++) {
+    const data = {}; // 一级分类数据
+    if (list[i].categoryLevel === '1') {
+      data.categoryName = list[i].categoryName; // 分类名称
+      data.categoryLevel = list[i].categoryLevel; // 分类级别
+      data.id = list[i].id; // 一级分类id
+      // 筛选父级id和二级分类id相同的数据
+      data.content = arr.filter((val) => {
+        // eslint-disable-next-line eqeqeq
+        return val.parentId == data.id;
+      });
+      array.push(data);
+    }
+
+    // console.log(array);
+  }
+  return array;
+}
+
+/**
+ * @description: 格式化二级分类对象
+ * @param {*} obj 二级分类数据
+ */
+function _formatTWOCategory(obj) {
+  const arr = {};
+  if (obj.categoryLevel === '2') {
+    arr.categoryName = obj.categoryName; // 分类名称
+    arr.categoryImg = obj.categoryImg; // 分类图片
+    arr.parentId = obj.parentId; // 父级id
+    arr.categoryId = obj.id; // 分类id
+    arr.categoryLevel = obj.categoryLevel; // 分类级别
+    return arr;
+  }
+}
+
+/**
+ * @description: 格式化分类列表
+ * @param {*} list 分类列表
+ */
+function formatCategory(list) {
+  // 判断是否存在数据
+  if (!list) {
+    return list;
+  }
+
+  if (list instanceof Array) {
+    // 数组
+    const arr = list.filter(_formatTWOCategory);
+    console.log(arr);
+    return _formatONECategory(list, arr);
+  }
+
+  // 单个对象
   return _formatDBTime(list);
 }
 
 module.exports = {
   formatUser,
-  formatAddress
+  formatAddress,
+  formatCategory
 };

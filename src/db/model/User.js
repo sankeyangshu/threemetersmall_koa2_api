@@ -3,13 +3,13 @@
  * @Author: 王振
  * @Date: 2021-06-12 15:27:02
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-12 16:23:27
+ * @LastEditTime: 2021-06-29 12:05:25
  */
 
 const seq = require('../seq');
 const { STRING, DECIMAL } = require('../types');
 
-//users数据库表
+// users数据库表
 const User = seq.define('user', {
   userName: {
     type: STRING,

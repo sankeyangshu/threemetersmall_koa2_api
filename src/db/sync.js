@@ -3,12 +3,12 @@
  * @Author: 王振
  * @Date: 2021-06-09 09:39:23
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-09 09:39:42
+ * @LastEditTime: 2021-06-30 17:00:09
  */
 
 const seq = require('./seq');
 
-//引入数据模型入口文件
+// 引入数据模型入口文件
 require('./model/index');
 
 // 测试连接
@@ -22,7 +22,7 @@ seq
   });
 
 // 执行同步   force: true--每次同步都会重新建表，如果不用重新建表，删除即可
-seq.sync({ force: true }).then(() => {
+seq.sync().then(() => {
   console.log('sync ok');
   process.exit();
 });

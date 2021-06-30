@@ -3,12 +3,12 @@
  * @Author: 王振
  * @Date: 2021-06-13 15:56:45
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-13 15:56:57
+ * @LastEditTime: 2021-06-30 14:16:20
  */
 
 const Ajv = require('ajv');
 const ajv = new Ajv({
-  // allErrors: true // 输出所有的错误（比较慢）
+  allErrors: true // 输出所有的错误（比较慢）
 });
 
 /**
