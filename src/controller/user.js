@@ -29,10 +29,10 @@ const verify = util.promisify(jwt.verify);
 async function isExist(userName) {
   const userInfo = await getUserInfo(userName);
   if (userInfo) {
-    //已存在
+    // 已存在
     return new SuccessModel(userInfo);
   } else {
-    //不存在
+    // 不存在
     return new ErrorModel(registerUserNameNotExistInfo);
   }
 }
@@ -44,22 +44,22 @@ async function isExist(userName) {
  */
 async function register({ userName, password }) {
   const userInfo = await getUserInfo(userName);
-  //判断用户名是否存在
+  // 判断用户名是否存在
   if (userInfo) {
-    //用户名已存在
+    // 用户名已存在
     return new ErrorModel(registerUserNameExistInfo);
   }
 
-  //用户注册
+  // 用户注册
   try {
-    //注册成功
+    // 注册成功
     await createUser({
       userName,
       password: doCrypto(password)
     });
     return new SuccessModel();
   } catch (ex) {
-    //注册失败
+    // 注册失败
     console.error(ex.message, ex.stack);
     return new ErrorModel(registerFailInfo);
   }
@@ -72,16 +72,16 @@ async function register({ userName, password }) {
  * @param {string} password 密码
  */
 async function login(ctx, userName, password) {
-  //获取用户信息
+  // 获取用户信息
   const userInfo = await getUserInfo(userName, doCrypto(password));
   if (!userInfo) {
-    //登录失败
+    // 登录失败
     return new ErrorModel(loginFailInfo);
   }
 
-  //登录成功,使用jwt加密用户信息，返回token
-  let token = jwt.sign(userInfo, SECRET, { expiresIn: '4h' }),
-    data = { token, userInfo };
+  // 登录成功,使用jwt加密用户信息，返回token
+  const token = jwt.sign(userInfo, SECRET, { expiresIn: '4h' });
+  const data = { token, userInfo };
   return new SuccessModel(data);
 }
 
@@ -93,7 +93,7 @@ async function login(ctx, userName, password) {
  * @param {string} picture 头像
  */
 async function changeInfo(ctx, { nickName, picture }) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const { userName } = payload;
@@ -108,10 +108,10 @@ async function changeInfo(ctx, { nickName, picture }) {
     { userName }
   );
   if (result) {
-    //执行成功
+    // 执行成功
     return new SuccessModel();
   }
-  //失败
+  // 失败
   return new ErrorModel(changeInfoFailInfo);
 }
 
@@ -122,7 +122,7 @@ async function changeInfo(ctx, { nickName, picture }) {
  * @param {string} newPassword 新密码
  */
 async function changePassword(ctx, { password, newPassword }) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const { userName } = payload;
@@ -134,11 +134,11 @@ async function changePassword(ctx, { password, newPassword }) {
     }
   );
   if (result) {
-    //修改成功
+    // 修改成功
     return new SuccessModel();
   }
 
-  //修改失败
+  // 修改失败
   return new ErrorModel(changePasswordFailInfo);
 }
 

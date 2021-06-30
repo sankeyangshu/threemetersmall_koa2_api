@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-13 15:51:08
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-13 15:51:20
+ * @LastEditTime: 2021-06-30 17:07:39
  */
 
 const crypto = require('crypto');
@@ -15,7 +15,7 @@ const { CRYPTO_SECRET_KEY } = require('../conf/constant');
  */
 function _md5(content) {
   const md5 = crypto.createHash('md5');
-  return md5.update(content).digest('hex'); //hex 十六进制
+  return md5.update(content).digest('hex'); // hex 十六进制
 }
 
 /**

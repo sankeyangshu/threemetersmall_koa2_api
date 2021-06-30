@@ -8,13 +8,13 @@
 
 const { isProd } = require('../utils/env');
 
-//本地Redis配置
+// 本地Redis配置
 let REDIS_CONF = {
   port: 6379,
   host: '127.0.0.1'
 };
 
-//本地MySQL配置
+// 本地MySQL配置
 let MYSQL_CONF = {
   host: 'localhost',
   user: 'root',

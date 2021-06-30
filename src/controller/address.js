@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-15 19:59:41
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-22 14:50:49
+ * @LastEditTime: 2021-06-30 17:06:35
  */
 
 const {
@@ -35,13 +35,13 @@ async function addAddress(
   ctx,
   { name, tel, province, city, county, addressDetail, areaCode, isDefault }
 ) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const { id } = payload;
 
   try {
-    //添加收货地址
+    // 添加收货地址
     await createAddress({
       userId: id,
       name,
@@ -55,7 +55,7 @@ async function addAddress(
     });
     return new SuccessModel();
   } catch (ex) {
-    //添加失败
+    // 添加失败
     console.error(ex.message, ex.stack);
     return new ErrorModel({
       code: 10010,
@@ -69,12 +69,12 @@ async function addAddress(
  * @param {*} ctx 上下文
  */
 async function getAddress(ctx) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const userId = payload.id;
 
-  //获取用户收货地址
+  // 获取用户收货地址
   const address = await getAddressList(userId);
   return new SuccessModel(address);
 }
@@ -85,12 +85,12 @@ async function getAddress(ctx) {
  * @param {*} id 地址id
  */
 async function getAddressDetails(ctx, id) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const userId = payload.id;
 
-  //获取用户收货地址详情数据
+  // 获取用户收货地址详情数据
   const details = await getAddressDetail({ userId, id });
   return new SuccessModel(details);
 }
@@ -112,7 +112,7 @@ async function changeAddress(
   ctx,
   { id, name, tel, province, city, county, addressDetail, areaCode, isDefault }
 ) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const userId = payload.id;
@@ -131,7 +131,7 @@ async function changeAddress(
     { userId, id }
   );
   if (result) {
-    //执行成功
+    // 执行成功
     return new SuccessModel();
   }
   return new ErrorModel({
@@ -146,14 +146,14 @@ async function changeAddress(
  * @param {*} id 收货地址id
  */
 async function destroyAddress(ctx, id) {
-  //解析token，获取用户信息
+  // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const userId = payload.id;
 
   const result = await deleteAddress({ userId, id });
   if (result) {
-    //删除成功
+    // 删除成功
     return new SuccessModel();
   }
   return new ErrorModel({

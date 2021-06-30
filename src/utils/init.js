@@ -10,10 +10,11 @@ const Router = require('koa-router');
 
 class InitManger {
   static InitCore(app) {
-    //入口方法
+    // 入口方法
     InitManger.app = app;
     InitManger.InitLoadRouters();
   }
+
   static InitLoadRouters() {
     // 参数：第一个参数固定参数module，第二个参数要加载的模块的文件路径，第三个参数：每次加载一个参数执行的函数
     // 在node.js中process.cwd()方法可以获取项目的根路径

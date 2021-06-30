@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-09 09:37:03
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-09 09:37:32
+ * @LastEditTime: 2021-06-30 17:07:00
  */
 
 const Sequelize = require('sequelize');
@@ -14,7 +14,7 @@ const { host, user, password, database } = MYSQL_CONF;
 const conf = {
   host,
   dialect: 'mysql',
-  timezone: '+08:00' //时区，北京时间
+  timezone: '+08:00' // 时区，北京时间
 };
 
 if (isTest) {

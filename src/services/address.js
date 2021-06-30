@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-15 20:06:58
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-22 14:31:12
+ * @LastEditTime: 2021-06-30 17:07:30
  */
 
 const { Address } = require('../db/model/index');
@@ -14,20 +14,20 @@ const { formatAddress } = require('./_format');
  * @param {*} userId 用户id
  */
 async function getAddressList(userId) {
-  //查询条件
+  // 查询条件
   const whereOpt = { userId };
 
-  //查询数据库
+  // 查询数据库
   const result = await Address.findAll({
     where: whereOpt
   });
 
-  //判断是否查询到数据
+  // 判断是否查询到数据
   if (result == null) {
     return result;
   }
 
-  //格式化数据
+  // 格式化数据
   let addressList = result.map((res) => res.dataValues);
   addressList = formatAddress(addressList);
   return addressList;
@@ -39,20 +39,20 @@ async function getAddressList(userId) {
  * @param {*} id 地址id
  */
 async function getAddressDetail({ userId, id }) {
-  //查询条件
+  // 查询条件
   const whereOpt = { userId, id };
 
-  //查询数据库
+  // 查询数据库
   const result = await Address.findOne({
     where: whereOpt
   });
 
-  //判断是否查询到数据
+  // 判断是否查询到数据
   if (result == null) {
     return result;
   }
 
-  //格式化数据
+  // 格式化数据
   const addressDetail = formatAddress(result.dataValues);
   return addressDetail;
 }
@@ -80,7 +80,7 @@ async function createAddress({
   areaCode,
   isDefault
 }) {
-  //插入数据
+  // 插入数据
   const result = await Address.create({
     userId,
     name,
@@ -104,7 +104,7 @@ async function updateAddress(
   { name, tel, province, city, county, addressDetail, areaCode, isDefault },
   { userId, id }
 ) {
-  //拼接修改内容
+  // 拼接修改内容
   const updateData = {};
   if (name) {
     updateData.name = name;
@@ -131,15 +131,15 @@ async function updateAddress(
     updateData.isDefault = isDefault;
   }
 
-  //查询条件
+  // 查询条件
   const whereData = { userId, id };
 
-  //执行修改
+  // 执行修改
   const result = await Address.update(updateData, {
     where: whereData
   });
 
-  return result[0] > 0; //修改的行数
+  return result[0] > 0; // 修改的行数
 }
 
 /**

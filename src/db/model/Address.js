@@ -3,13 +3,13 @@
  * @Author: 王振
  * @Date: 2021-06-14 15:43:35
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-22 13:37:05
+ * @LastEditTime: 2021-06-30 17:06:52
  */
 
 const seq = require('../seq');
 const { STRING, BOOLEAN, INTEGER } = require('../types');
 
-//address数据库表
+// address数据库表
 const Address = seq.define('address', {
   userId: {
     type: INTEGER,

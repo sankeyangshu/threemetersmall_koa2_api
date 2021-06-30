@@ -15,28 +15,28 @@ const { formatUser } = require('./_format');
  * @param {string} password 密码
  */
 async function getUserInfo(userName, password) {
-  //查询条件
+  // 查询条件
   const whereOpt = { userName };
 
-  //判断请求体里是否存在密码
+  // 判断请求体里是否存在密码
   if (password) {
-    //将密码也放到查询条件中
+    // 将密码也放到查询条件中
     Object.assign(whereOpt, { password });
   }
 
-  //查询数据库
+  // 查询数据库
   const result = await User.findOne({
     attributes: ['id', 'userName', 'nickName', 'picture'],
     where: whereOpt
   });
 
-  //判断是否查询到数据
+  // 判断是否查询到数据
   if (result == null) {
-    //未找到
+    // 未找到
     return result;
   }
 
-  //格式化数据
+  // 格式化数据
   const formatRes = formatUser(result.dataValues);
   return formatRes;
 }
@@ -49,11 +49,11 @@ async function getUserInfo(userName, password) {
  * @param {string} nickName 昵称
  */
 async function createUser({ userName, password, gender = 3, nickName }) {
-  //插入数据
+  // 插入数据
   const result = await User.create({
     userName,
     password,
-    nickName: nickName ? nickName : userName,
+    nickName: nickName || userName,
     gender
   });
   return result.dataValues;
@@ -65,7 +65,7 @@ async function createUser({ userName, password, gender = 3, nickName }) {
  * @param {Object} param1 查询条件 {userName,password}
  */
 async function updateUser({ newPassword, newNickName, newPicture }, { userName, password }) {
-  //拼接修改内容
+  // 拼接修改内容
   const updateData = {};
   if (newPassword) {
     updateData.password = newPassword;
@@ -77,7 +77,7 @@ async function updateUser({ newPassword, newNickName, newPicture }, { userName, 
     updateData.picture = newPicture;
   }
 
-  //拼接查询条件
+  // 拼接查询条件
   const whereData = {
     userName
   };
@@ -85,12 +85,12 @@ async function updateUser({ newPassword, newNickName, newPicture }, { userName, 
     whereData.password = password;
   }
 
-  //执行修改
+  // 执行修改
   const result = await User.update(updateData, {
     where: whereData
   });
 
-  return result[0] > 0; //修改的行数
+  return result[0] > 0; // 修改的行数
 }
 
 module.exports = {
