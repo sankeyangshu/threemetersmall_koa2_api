@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-13 14:10:33
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 09:40:04
+ * @LastEditTime: 2021-07-01 17:08:50
  */
 
 // 获取默认头像
@@ -144,8 +144,49 @@ function formatCategory(list) {
   return _formatDBTime(list);
 }
 
+/**
+ * @description: 格式化商品的规格
+ * @param {*} obj 商品规格数据
+ */
+function _formatSku(obj) {
+  // 获取主辅规格标题
+  const mainTitle = obj.mainSpec;
+  const auxiTitle = obj.auxiSpec;
+  const mainArray = obj.mainSpecValue.split(',');
+  const auxiArray = obj.auxiSpecValue.split(',');
+  const sku = [
+    { mainTitle, mainArray },
+    { auxiTitle, auxiArray }
+  ];
+  return sku;
+}
+
+/**
+ * @description: 格式化商品详情
+ * @param {*} obj 商品数据
+ */
+function formatGoods(obj) {
+  const newObj = {};
+  // 格式化商品详情时间
+  newObj.createdAt = timeFormat(obj.createdAt);
+  newObj.updatedAt = timeFormat(obj.updatedAt);
+  // 格式化商品规格sku
+  newObj.sku = _formatSku(obj);
+  // 格式化其他信息
+  newObj.goodsName = obj.goodsName;
+  newObj.goodsInfo = obj.goodsInfo;
+  newObj.goodsImg = obj.goodsImg;
+  newObj.goodsPrice = obj.goodsPrice;
+  newObj.linePrice = obj.linePrice;
+  newObj.goodsDetail = obj.goodsDetail;
+  newObj.goodsSales = obj.goodsSales;
+
+  return newObj;
+}
+
 module.exports = {
   formatUser,
   formatAddress,
-  formatCategory
+  formatCategory,
+  formatGoods
 };
