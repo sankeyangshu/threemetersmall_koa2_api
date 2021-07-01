@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-13 14:10:33
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-30 16:57:43
+ * @LastEditTime: 2021-07-01 09:40:04
  */
 
 // 获取默认头像
@@ -137,7 +137,6 @@ function formatCategory(list) {
   if (list instanceof Array) {
     // 数组
     const arr = list.filter(_formatTWOCategory);
-    console.log(arr);
     return _formatONECategory(list, arr);
   }
 
