@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 14:43:38
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 17:12:17
+ * @LastEditTime: 2021-07-02 09:26:59
  */
 
 // 引入koa路由  该写法等同于 const Router = require('koa-router'); const router = new Router()
@@ -17,7 +17,9 @@ router.prefix('/api/goods');
 
 // 用户获取商品列表
 router.get('/goodslist', async (ctx, next) => {
-  const { categoryId, pageIndex, pageSize } = ctx.request.query;
+  let { categoryId, pageIndex, pageSize } = ctx.request.query;
+  pageIndex = parseInt(pageIndex);
+  pageSize = parseInt(pageSize);
   ctx.body = await getGoodsInfo({ categoryId, pageIndex, pageSize });
 });
 

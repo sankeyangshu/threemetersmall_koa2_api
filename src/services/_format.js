@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-13 14:10:33
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 17:08:50
+ * @LastEditTime: 2021-07-02 13:32:21
  */
 
 // 获取默认头像
@@ -155,8 +155,8 @@ function _formatSku(obj) {
   const mainArray = obj.mainSpecValue.split(',');
   const auxiArray = obj.auxiSpecValue.split(',');
   const sku = [
-    { mainTitle, mainArray },
-    { auxiTitle, auxiArray }
+    { skuTitle: mainTitle, skuList: mainArray },
+    { skuTitle: auxiTitle, skuList: auxiArray }
   ];
   return sku;
 }

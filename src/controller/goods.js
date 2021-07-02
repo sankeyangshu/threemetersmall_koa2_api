@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 15:50:34
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 17:11:24
+ * @LastEditTime: 2021-07-02 09:22:36
  */
 
 const { createGoods, getGoodsList, getGoodsDetail } = require('../services/goods');
@@ -74,10 +74,18 @@ async function addGoods({
  * @param {number} pageIndex 页数
  * @param {number} pageSize 每页多少条
  */
-async function getGoodsInfo({ categoryId, pageIndex, pageSize }) {
+async function getGoodsInfo({ categoryId, pageIndex = 0, pageSize = 10 }) {
   // 获取商品列表数据
-  const list = await getGoodsList({ categoryId, pageIndex, pageSize });
-  return new SuccessModel(list);
+  const result = await getGoodsList({ categoryId, pageIndex, pageSize });
+  const goodsList = result.goodsList;
+  // 拼接返回数据
+  return new SuccessModel({
+    isEmpty: goodsList.length === 0,
+    goodsList,
+    pageSize,
+    pageIndex,
+    count: result.count
+  });
 }
 
 /**

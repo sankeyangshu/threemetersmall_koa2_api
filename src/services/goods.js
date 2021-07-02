@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 14:53:06
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 16:49:08
+ * @LastEditTime: 2021-07-02 09:48:14
  */
 
 const { GoodsSku } = require('../db/model/index');
@@ -28,7 +28,15 @@ async function getGoodsList({ categoryId, pageIndex = 0, pageSize = 10 }) {
     offset: pageSize * pageIndex, // 跳过多少条
     order: [['id', 'asc']],
     where: WhereOpts,
-    attributes: ['id', 'categoryId', 'goodsName', 'goodsInfo', 'goodsImg', 'goodsPrice']
+    attributes: [
+      'id',
+      'categoryId',
+      'goodsName',
+      'goodsInfo',
+      'goodsImg',
+      'goodsPrice',
+      'linePrice'
+    ]
   });
   // result.count 总数，跟分页无关
   // result.rows 查询结果，数组
