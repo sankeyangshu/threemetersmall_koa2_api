@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 13:03:31
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 15:55:41
+ * @LastEditTime: 2021-07-05 19:49:00
  */
 
 const seq = require('../seq');
@@ -52,25 +52,10 @@ const GoodsSku = seq.define('goodssku', {
     type: INTEGER,
     comment: '商品销量'
   },
-  mainSpec: {
+  specSku: {
     type: STRING,
     allowNull: false,
-    comment: '主规格名称'
-  },
-  mainSpecValue: {
-    type: STRING,
-    allowNull: false,
-    comment: '主规格值'
-  },
-  auxiSpec: {
-    type: STRING,
-    allowNull: false,
-    comment: '辅规格名称'
-  },
-  auxiSpecValue: {
-    type: STRING,
-    allowNull: false,
-    comment: '辅规格值'
+    comment: '规格sku'
   },
   isShelves: {
     type: BOOLEAN,
