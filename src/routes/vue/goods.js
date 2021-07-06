@@ -3,14 +3,15 @@
  * @Author: 王振
  * @Date: 2021-07-01 14:43:38
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-02 09:26:59
+ * @LastEditTime: 2021-07-06 09:48:56
  */
 
 // 引入koa路由  该写法等同于 const Router = require('koa-router'); const router = new Router()
 const router = require('koa-router')();
-const { addGoods, getGoodsInfo, getGoodsData } = require('../../controller/goods');
+const { addGoods, getGoodsInfo, getGoodsData, addSpec } = require('../../controller/goods');
 const { genValidator } = require('../../middlewares/validator');
 const goodsValidate = require('../../validator/goods');
+const specValidate = require('../../validator/spec');
 
 // 路由前缀
 router.prefix('/api/goods');
@@ -40,10 +41,6 @@ router.post('/addgoods', genValidator(goodsValidate), async (ctx, next) => {
     linePrice,
     goodsDetail,
     goodsSales,
-    mainSpec,
-    mainSpecValue,
-    auxiSpec,
-    auxiSpecValue,
     isShelves
   } = ctx.request.body;
   ctx.body = await addGoods({
@@ -55,12 +52,14 @@ router.post('/addgoods', genValidator(goodsValidate), async (ctx, next) => {
     linePrice,
     goodsDetail,
     goodsSales,
-    mainSpec,
-    mainSpecValue,
-    auxiSpec,
-    auxiSpecValue,
     isShelves
   });
+});
+
+// 新增商品规格
+router.post('/addspec', genValidator(specValidate), async (ctx, next) => {
+  const { goodsId, specName, specValue, specImg, specPrice, specStock } = ctx.request.body;
+  ctx.body = await addSpec({ goodsId, specName, specValue, specImg, specPrice, specStock });
 });
 
 // 修改商品详情

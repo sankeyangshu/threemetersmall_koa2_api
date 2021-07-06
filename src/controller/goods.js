@@ -3,10 +3,11 @@
  * @Author: 王振
  * @Date: 2021-07-01 15:50:34
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-02 09:22:36
+ * @LastEditTime: 2021-07-06 09:56:23
  */
 
 const { createGoods, getGoodsList, getGoodsDetail } = require('../services/goods');
+const { createSpec, getSpecInfo } = require('../services/spec');
 const { SuccessModel, ErrorModel } = require('../model/ResModel');
 
 /**
@@ -19,10 +20,6 @@ const { SuccessModel, ErrorModel } = require('../model/ResModel');
  * @param {number} linePrice 商品原价
  * @param {string} goodsDetail 商品详情
  * @param {number} goodsSales 商品销量
- * @param {string} mainSpec 主规格名称
- * @param {string} mainSpecValue 主规格值
- * @param {string} auxiSpec 辅规格名称
- * @param {string} auxiSpecValue 辅规格值
  * @param {boolean} isShelves 是否上架
  */
 async function addGoods({
@@ -34,10 +31,6 @@ async function addGoods({
   linePrice,
   goodsDetail,
   goodsSales,
-  mainSpec,
-  mainSpecValue,
-  auxiSpec,
-  auxiSpecValue,
   isShelves
 }) {
   try {
@@ -51,10 +44,6 @@ async function addGoods({
       linePrice,
       goodsDetail,
       goodsSales,
-      mainSpec,
-      mainSpecValue,
-      auxiSpec,
-      auxiSpecValue,
       isShelves
     });
     return new SuccessModel();
@@ -96,11 +85,37 @@ async function getGoodsInfo({ categoryId, pageIndex = 0, pageSize = 10 }) {
 async function getGoodsData(id) {
   // 获取商品详情数据
   const data = await getGoodsDetail(id);
+  // 获取商品sku数据
+  data.sku = await getSpecInfo({ goodsId: id });
   return new SuccessModel(data);
+}
+
+/**
+ * @description: 新增商品规格
+ * @param {*} goodsId 所属商品id
+ * @param {*} specName 规格名称
+ * @param {*} specValue 规格值
+ * @param {*} specImg 规格图片
+ * @param {*} specPrice 规格价格
+ * @param {*} specStock 规格库存
+ */
+async function addSpec({ goodsId, specName, specValue, specImg, specPrice, specStock }) {
+  try {
+    await createSpec({ goodsId, specName, specValue, specImg, specPrice, specStock });
+    return new SuccessModel();
+  } catch (ex) {
+    // 添加失败
+    console.error(ex.message, ex.stack);
+    return new ErrorModel({
+      code: 10010,
+      message: '添加规格失败'
+    });
+  }
 }
 
 module.exports = {
   addGoods,
   getGoodsInfo,
-  getGoodsData
+  getGoodsData,
+  addSpec
 };

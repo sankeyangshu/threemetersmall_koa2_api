@@ -3,11 +3,11 @@
  * @Author: 王振
  * @Date: 2021-07-05 19:31:32
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-05 19:40:38
+ * @LastEditTime: 2021-07-06 08:55:26
  */
 
 const seq = require('../seq');
-const { STRING, DECIMAL, INTEGER } = require('../types');
+const { STRING, INTEGER } = require('../types');
 
 // specs数据库表
 const Spec = seq.define('spec', {
@@ -32,15 +32,13 @@ const Spec = seq.define('spec', {
     comment: '规格值图片'
   },
   specPrice: {
-    type: DECIMAL,
+    type: STRING,
     allowNull: false,
-    defaultValue: 0.0,
     comment: '规格值价格'
   },
   specStock: {
-    type: DECIMAL,
+    type: STRING,
     allowNull: false,
-    defaultValue: 0.0,
     comment: '库存'
   }
 });

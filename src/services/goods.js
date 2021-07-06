@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 14:53:06
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-02 09:48:14
+ * @LastEditTime: 2021-07-06 09:04:56
  */
 
 const { GoodsSku } = require('../db/model/index');
@@ -83,10 +83,6 @@ async function getGoodsDetail(id) {
  * @param {number} linePrice 商品原价
  * @param {string} goodsDetail 商品详情
  * @param {number} goodsSales 商品销量
- * @param {string} mainSpec 主规格名称
- * @param {string} mainSpecValue 主规格值
- * @param {string} auxiSpec 辅规格名称
- * @param {string} auxiSpecValue 辅规格值
  * @param {boolean} isShelves 是否上架
  */
 async function createGoods({
@@ -98,10 +94,6 @@ async function createGoods({
   linePrice,
   goodsDetail,
   goodsSales,
-  mainSpec,
-  mainSpecValue,
-  auxiSpec,
-  auxiSpecValue,
   isShelves
 }) {
   // 插入数据
@@ -114,10 +106,6 @@ async function createGoods({
     linePrice,
     goodsDetail,
     goodsSales,
-    mainSpec,
-    mainSpecValue,
-    auxiSpec,
-    auxiSpecValue,
     isShelves
   });
   return result.dataValues;

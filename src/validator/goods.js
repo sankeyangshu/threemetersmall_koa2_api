@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 16:09:34
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-01 16:15:35
+ * @LastEditTime: 2021-07-06 08:48:13
  */
 
 const validate = require('./_validate');
@@ -43,25 +43,9 @@ const SCHEMA = {
       type: 'number',
       minimum: 0
     },
-    mainSpec: {
+    specSku: {
       type: 'string',
-      maxLength: 255,
-      minLength: 2
-    },
-    mainSpecValue: {
-      type: 'string',
-      maxLength: 255,
-      minLength: 2
-    },
-    auxiSpec: {
-      type: 'string',
-      maxLength: 255,
-      minLength: 2
-    },
-    auxiSpecValue: {
-      type: 'string',
-      maxLength: 255,
-      minLength: 2
+      maxLength: 255
     },
     isShelves: {
       type: 'boolean'

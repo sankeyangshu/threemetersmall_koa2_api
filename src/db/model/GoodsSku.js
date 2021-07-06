@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-01 13:03:31
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-05 19:49:00
+ * @LastEditTime: 2021-07-06 09:04:38
  */
 
 const seq = require('../seq');
@@ -51,11 +51,6 @@ const GoodsSku = seq.define('goodssku', {
   goodsSales: {
     type: INTEGER,
     comment: '商品销量'
-  },
-  specSku: {
-    type: STRING,
-    allowNull: false,
-    comment: '规格sku'
   },
   isShelves: {
     type: BOOLEAN,
