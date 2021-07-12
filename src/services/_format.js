@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-13 14:10:33
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-06 09:26:00
+ * @LastEditTime: 2021-07-09 15:16:20
  */
 
 // 获取默认头像
@@ -149,20 +149,11 @@ function formatCategory(list) {
  * @param {*} obj 商品数据
  */
 function formatGoods(obj) {
-  const newObj = {};
   // 格式化商品详情时间
-  newObj.createdAt = timeFormat(obj.createdAt);
-  newObj.updatedAt = timeFormat(obj.updatedAt);
-  // 格式化其他信息
-  newObj.goodsName = obj.goodsName;
-  newObj.goodsInfo = obj.goodsInfo;
-  newObj.goodsImg = obj.goodsImg;
-  newObj.goodsPrice = obj.goodsPrice;
-  newObj.linePrice = obj.linePrice;
-  newObj.goodsDetail = obj.goodsDetail;
-  newObj.goodsSales = obj.goodsSales;
+  obj.createdAt = timeFormat(obj.createdAt);
+  obj.updatedAt = timeFormat(obj.updatedAt);
 
-  return newObj;
+  return obj;
 }
 
 /**
@@ -172,7 +163,7 @@ function formatGoods(obj) {
 function _formatSku(obj) {
   const sku = {};
   sku.skuTitle = obj.specName; // 获取规格标题
-  sku.skuValue = obj.specValue.split(','); // 获取规格数据
+  sku.specList = obj.specValue.split(','); // 获取规格数据
   sku.skuPrice = obj.specPrice.split(','); // 获取规格价格
   sku.skuImg = obj.specImg.split(','); // 获取规格图片
   sku.skuStock = obj.specStock.split(','); // 获取规格库存

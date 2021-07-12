@@ -3,12 +3,13 @@
  * @Author: 王振
  * @Date: 2021-07-01 15:50:34
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-06 09:56:23
+ * @LastEditTime: 2021-07-09 17:07:54
  */
 
 const { createGoods, getGoodsList, getGoodsDetail } = require('../services/goods');
 const { createSpec, getSpecInfo } = require('../services/spec');
 const { SuccessModel, ErrorModel } = require('../model/ResModel');
+const { randomNumber, formatSkuList } = require('../utils/utils');
 
 /**
  * @description: 新增商品
@@ -86,7 +87,21 @@ async function getGoodsData(id) {
   // 获取商品详情数据
   const data = await getGoodsDetail(id);
   // 获取商品sku数据
-  data.sku = await getSpecInfo({ goodsId: id });
+  const list = await getSpecInfo({ goodsId: id });
+
+  // 规格数组
+  data.specList = list;
+  // sku数组
+  const arr = list.map((res) => {
+    return res.specList;
+  });
+  data.skuList = formatSkuList(arr).map((res) => {
+    return {
+      id: randomNumber(6),
+      spec: res
+    };
+  });
+
   return new SuccessModel(data);
 }
 
