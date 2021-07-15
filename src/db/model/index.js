@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-12 16:22:23
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-05 19:49:17
+ * @LastEditTime: 2021-07-15 09:12:31
  */
 
 const User = require('./User');
@@ -11,6 +11,7 @@ const Address = require('./Address');
 const Category = require('./Category');
 const GoodsSku = require('./GoodsSku');
 const Spec = require('./Spec');
+const ShoppingCart = require('./ShoppingCart');
 
 // 创建外键关联,地址数据表和个人信息数据表
 Address.belongsTo(User, {
@@ -27,10 +28,16 @@ GoodsSku.hasMany(Spec, {
   foreignKey: 'goodsId'
 });
 
+// 购物车和用户数据表外键关联
+ShoppingCart.belongsTo(User, {
+  foreignKey: 'userId'
+});
+
 module.exports = {
   User,
   Address,
   Category,
   GoodsSku,
-  Spec
+  Spec,
+  ShoppingCart
 };
