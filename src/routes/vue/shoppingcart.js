@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:15:44
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-15 10:09:23
+ * @LastEditTime: 2021-07-19 16:57:04
  */
 
 // 引入koa路由  该写法等同于 const Router = require('koa-router'); const router = new Router()
@@ -30,8 +30,17 @@ router.get('/getshopping', async (ctx, next) => {
 
 // 添加购物车
 router.post('/addshopping', genValidator(shopcartValidate), async (ctx, next) => {
-  const { goodsId, goodsNumber, spec, isDelete } = ctx.request.body;
-  ctx.body = await addShopping(ctx, { goodsId, goodsNumber, spec, isDelete });
+  const { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isDelete } =
+    ctx.request.body;
+  ctx.body = await addShopping(ctx, {
+    goodsId,
+    goodsName,
+    goodsImg,
+    goodsNumber,
+    goodsPrice,
+    spec,
+    isDelete
+  });
 });
 
 // 更新购物车数据

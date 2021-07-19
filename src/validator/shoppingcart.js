@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:17:53
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-15 09:30:57
+ * @LastEditTime: 2021-07-19 16:23:50
  */
 
 const validate = require('./_validate');
@@ -18,7 +18,18 @@ const SCHEMA = {
     goodsId: {
       type: 'number'
     },
+    goodsName: {
+      type: 'string',
+      maxLength: 255
+    },
+    goodsImg: {
+      type: 'string',
+      maxLength: 255
+    },
     goodsNumber: {
+      type: 'number'
+    },
+    goodsPrice: {
       type: 'number'
     },
     spec: {

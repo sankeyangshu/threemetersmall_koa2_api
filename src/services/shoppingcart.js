@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:26:16
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-15 09:43:05
+ * @LastEditTime: 2021-07-19 16:57:36
  */
 
 const { ShoppingCart } = require('../db/model/index');
@@ -44,12 +44,33 @@ async function getShoppingList({ userId, pageIndex = 0, pageSize = 10 }) {
  * @description: 创造购物车
  * @param {number} userId 用户id
  * @param {number} goodsId 商品id
+ * @param {string} goodsName 商品名称
+ * @param {string} goodsImg 商品头图
  * @param {number} goodsNumber 商品数量
+ * @param {number} goodsPrice 商品价格
  * @param {string} spec 商品规格
  * @param {number} isDelete 是否删除
  */
-async function createShopping({ userId, goodsId, goodsNumber, spec, isDelete }) {
-  const result = await ShoppingCart.create({ userId, goodsId, goodsNumber, spec, isDelete });
+async function createShopping({
+  userId,
+  goodsId,
+  goodsName,
+  goodsImg,
+  goodsNumber,
+  goodsPrice,
+  spec,
+  isDelete
+}) {
+  const result = await ShoppingCart.create({
+    userId,
+    goodsId,
+    goodsName,
+    goodsImg,
+    goodsNumber,
+    goodsPrice,
+    spec,
+    isDelete
+  });
   return result.dataValues;
 }
 

@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:07:05
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-15 09:30:46
+ * @LastEditTime: 2021-07-19 16:23:18
  */
 
 const seq = require('../seq');
@@ -21,10 +21,25 @@ const ShoppingCart = seq.define('shoppingcart', {
     allowNull: false,
     comment: '关联商品id'
   },
+  goodsName: {
+    type: STRING,
+    allowNull: false,
+    comment: '所选商品名称'
+  },
+  goodsImg: {
+    type: STRING,
+    allowNull: false,
+    comment: '所选商品头图'
+  },
   goodsNumber: {
     type: INTEGER,
     allowNull: false,
     comment: '数量'
+  },
+  goodsPrice: {
+    type: INTEGER,
+    allowNull: false,
+    comment: '商品价格'
   },
   spec: {
     type: STRING,

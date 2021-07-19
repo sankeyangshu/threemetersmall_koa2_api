@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:44:38
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-15 10:02:39
+ * @LastEditTime: 2021-07-19 16:48:14
  */
 
 const {
@@ -23,11 +23,15 @@ const verify = util.promisify(jwt.verify);
  * @param {*} ctx 上下文
  * @param {number} goodsId 商品id
  * @param {number} goodsNumber 商品数量
+ * @param {number} goodsPrice 商品价格
  * @param {number} spec 商品规格
  * @param {number} isDelete 是否删除
  * @return {*}
  */
-async function addShopping(ctx, { goodsId, goodsNumber, spec, isDelete }) {
+async function addShopping(
+  ctx,
+  { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isDelete }
+) {
   // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
@@ -37,7 +41,10 @@ async function addShopping(ctx, { goodsId, goodsNumber, spec, isDelete }) {
     await createShopping({
       userId: id,
       goodsId,
+      goodsName,
+      goodsImg,
       goodsNumber,
+      goodsPrice,
       spec,
       isDelete
     });
