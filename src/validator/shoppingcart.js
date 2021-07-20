@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:17:53
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-19 16:23:50
+ * @LastEditTime: 2021-07-20 13:05:54
  */
 
 const validate = require('./_validate');
@@ -35,6 +35,9 @@ const SCHEMA = {
     spec: {
       type: 'string',
       maxLength: 255
+    },
+    isChecked: {
+      type: 'boolean'
     },
     isDelete: {
       type: 'number',

@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:26:16
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-19 16:57:36
+ * @LastEditTime: 2021-07-20 13:40:22
  */
 
 const { ShoppingCart } = require('../db/model/index');
@@ -49,6 +49,7 @@ async function getShoppingList({ userId, pageIndex = 0, pageSize = 10 }) {
  * @param {number} goodsNumber 商品数量
  * @param {number} goodsPrice 商品价格
  * @param {string} spec 商品规格
+ * @param {boolean} isChecked 是否选中商品
  * @param {number} isDelete 是否删除
  */
 async function createShopping({
@@ -59,6 +60,7 @@ async function createShopping({
   goodsNumber,
   goodsPrice,
   spec,
+  isChecked,
   isDelete
 }) {
   const result = await ShoppingCart.create({
@@ -69,6 +71,7 @@ async function createShopping({
     goodsNumber,
     goodsPrice,
     spec,
+    isChecked,
     isDelete
   });
   return result.dataValues;
@@ -77,14 +80,18 @@ async function createShopping({
 /**
  * @description: 更新购物车数据
  * @param {number} goodsNumber 商品数量
+ * @param {boolean} isChecked 是否选中该商品
  * @param {number} userId 用户id
  * @param {number} id 购物车id
  */
-async function updateShopping({ goodsNumber }, { userId, id }) {
+async function updateShopping({ goodsNumber, isChecked }, { userId, id }) {
   // 拼接修改内容
   const updateData = {};
   if (goodsNumber) {
     updateData.goodsNumber = goodsNumber;
+  }
+  if (isChecked) {
+    updateData.isChecked = isChecked;
   }
 
   // 查询条件
@@ -94,6 +101,7 @@ async function updateShopping({ goodsNumber }, { userId, id }) {
   const result = await ShoppingCart.update(updateData, {
     where: whereData
   });
+  console.log(result);
 
   return result[0] > 0; // 修改的行数
 }

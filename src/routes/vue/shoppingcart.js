@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:15:44
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-19 16:57:04
+ * @LastEditTime: 2021-07-20 13:10:57
  */
 
 // 引入koa路由  该写法等同于 const Router = require('koa-router'); const router = new Router()
@@ -30,7 +30,7 @@ router.get('/getshopping', async (ctx, next) => {
 
 // 添加购物车
 router.post('/addshopping', genValidator(shopcartValidate), async (ctx, next) => {
-  const { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isDelete } =
+  const { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isChecked, isDelete } =
     ctx.request.body;
   ctx.body = await addShopping(ctx, {
     goodsId,
@@ -39,19 +39,20 @@ router.post('/addshopping', genValidator(shopcartValidate), async (ctx, next) =>
     goodsNumber,
     goodsPrice,
     spec,
+    isChecked,
     isDelete
   });
 });
 
 // 更新购物车数据
 router.patch('/updateshopping', genValidator(shopcartValidate), async (ctx, next) => {
-  const { goodsNumber, id } = ctx.request.body;
-  ctx.body = await changeShopping(ctx, { goodsNumber, id });
+  const { goodsNumber, id, isChecked } = ctx.request.body;
+  ctx.body = await changeShopping(ctx, { goodsNumber, id, isChecked });
 });
 
 // 删除购物车数据
 router.delete('/deleteshopping', genValidator(shopcartValidate), async (ctx, next) => {
-  const { id } = ctx.request.body;
+  const { id } = ctx.request.query;
   ctx.body = await destoryShopping(ctx, id);
 });
 

@@ -3,11 +3,11 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:07:05
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-19 16:23:18
+ * @LastEditTime: 2021-07-20 13:05:20
  */
 
 const seq = require('../seq');
-const { STRING, INTEGER, DECIMAL } = require('../types');
+const { STRING, INTEGER, DECIMAL, BOOLEAN } = require('../types');
 
 // users数据库表
 const ShoppingCart = seq.define('shoppingcart', {
@@ -45,6 +45,12 @@ const ShoppingCart = seq.define('shoppingcart', {
     type: STRING,
     allowNull: false,
     comment: '所选商品规格'
+  },
+  isChecked: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+    comment: '是否选中商品'
   },
   isDelete: {
     type: DECIMAL,

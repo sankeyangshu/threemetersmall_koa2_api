@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:44:38
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-19 16:48:14
+ * @LastEditTime: 2021-07-20 13:10:21
  */
 
 const {
@@ -30,14 +30,14 @@ const verify = util.promisify(jwt.verify);
  */
 async function addShopping(
   ctx,
-  { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isDelete }
+  { goodsId, goodsName, goodsImg, goodsNumber, goodsPrice, spec, isChecked, isDelete }
 ) {
   // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
   const { id } = payload;
   try {
-    // 添加收货地址
+    // 添加购物车
     await createShopping({
       userId: id,
       goodsId,
@@ -46,6 +46,7 @@ async function addShopping(
       goodsNumber,
       goodsPrice,
       spec,
+      isChecked,
       isDelete
     });
     return new SuccessModel();
@@ -92,7 +93,7 @@ async function getShopping(ctx, { pageIndex = 0, pageSize = 10 }) {
  * @param {*} id 商品id
  * @return {*}
  */
-async function changeShopping(ctx, { goodsNumber, id }) {
+async function changeShopping(ctx, { goodsNumber, id, isChecked }) {
   // 解析token，获取用户信息
   const token = ctx.header.authorization;
   const payload = await verify(token.split(' ')[1], SECRET);
@@ -100,7 +101,8 @@ async function changeShopping(ctx, { goodsNumber, id }) {
 
   const result = await updateShopping(
     {
-      goodsNumber
+      goodsNumber,
+      isChecked
     },
     { userId, id }
   );
