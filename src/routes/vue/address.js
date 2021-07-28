@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-06-15 19:26:01
  * @LastEditors: 王振
- * @LastEditTime: 2021-06-30 17:07:21
+ * @LastEditTime: 2021-07-27 15:31:43
  */
 
 // 引入koa路由  该写法等同于 const Router = require('koa-router'); const router = new Router()
@@ -67,7 +67,7 @@ router.patch('/modifyaddress', genValidator(addressValidate), async (ctx, next) 
 
 // 用户删除收货地址
 router.delete('/deladdress', async (ctx, next) => {
-  const { id } = ctx.request.body;
+  const { id } = ctx.request.query;
   ctx.body = await destroyAddress(ctx, id);
 });
 

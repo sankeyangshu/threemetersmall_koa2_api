@@ -3,7 +3,7 @@
  * @Author: 王振
  * @Date: 2021-07-15 09:26:16
  * @LastEditors: 王振
- * @LastEditTime: 2021-07-20 13:40:22
+ * @LastEditTime: 2021-07-27 10:46:12
  */
 
 const { ShoppingCart } = require('../db/model/index');
@@ -101,7 +101,6 @@ async function updateShopping({ goodsNumber, isChecked }, { userId, id }) {
   const result = await ShoppingCart.update(updateData, {
     where: whereData
   });
-  console.log(result);
 
   return result[0] > 0; // 修改的行数
 }
