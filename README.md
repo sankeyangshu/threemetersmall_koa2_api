@@ -2,23 +2,37 @@
 
 #### 介绍
 
-使用 koa2 开发三米商城 API
+使用 koa2 开发三米商城 API，该项目是三米商城的服务端项目，是基于[koa-template](https://github.com/1260323835/koa2-template)这个模版搭建的后端项目，该模版也是我的作品，大家也可以去看看这个项目。
+
+**注1：此项目属于个人学习项目，仅供学习和技术研究使用，不建议商用。**
+
+**注2：如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！**
 
 #### 软件架构
 
-软件架构说明
+nodejs + koa2 + mysql + sequelize + es6/7 + require-directory
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##### 前序准备
 
-#### 使用说明
+你需要在本地安装 [node](http://nodejs.org/) 和mysql，Koa 依赖 **node v7.6.0** 或 ES2015及更高版本和 async 方法支持。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```bash
+项目运行之前，请确保系统已安装了node和MySQL环境
+
+1.因为项目使用sequelize来创建数据库模型，所以我们首先需要在自己的MySQL中创建一个新的数据库，名为mall_db
+
+2.在控制台输入 node src/db/sync.js 来将数据模型写入到数据库表中
+```
+
+```bash
+git clone https://gitee.com/sankeyangshu/threemetersmall_koa2_api.git
+
+npm install
+
+npm run dev
+```
 
 #### 参与贡献
 
@@ -27,11 +41,7 @@
 3.  提交代码
 4.  新建 Pull Request
 
-#### 特技
+#### 许可证  
 
-1.  使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+[MIT License](https://gitee.com/sankeyangshu/threemetersmall_koa2_api/blob/master/LICENSE)
+
